@@ -1,200 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Be My Valentine, Ashley 💖</title>
+<script>
+  const yesBtn = document.getElementById('yesBtn');
+  const noHeartsBtn = document.getElementById('noHeartsBtn');
+  const mainText = document.getElementById('main-text');
+  const successText = document.getElementById('successText');
+  const heartsContainer = document.getElementById('hearts-container');
 
-  <!-- Romantic Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  /* ===== YES BUTTON ACTION ===== */
+  yesBtn.addEventListener('click', () => {
+    mainText.style.display = 'none';
+    successText.style.display = 'block';
 
-  <style>
-    /* ===== Base Styles ===== */
-    * {
-      box-sizing: border-box;
+    createHearts(40);
+    launchConfetti();
+    launchFireworks();
+  });
+
+  /* ===== PLAYFUL "BOY BYE" BUTTON ===== */
+  noHeartsBtn.addEventListener('mouseenter', () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noHeartsBtn.style.transform = `translate(${x}px, ${y}px)`;
+    noHeartsBtn.textContent = "Nice try 😏";
+  });
+
+  /* ===== Floating Hearts Generator ===== */
+  function createHearts(count) {
+    for (let i = 0; i < count; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💖';
+
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+      heart.style.fontSize = 16 + Math.random() * 20 + 'px';
+
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+  }
+
+  /* ===== CONFETTI EXPLOSION ===== */
+  function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+      const confetti = document.createElement('div');
+      confetti.style.position = 'fixed';
+      confetti.style.top = '50%';
+      confetti.style.left = '50%';
+      confetti.style.width = '10px';
+      confetti.style.height = '10px';
+      confetti.style.backgroundColor = randomColor();
+      confetti.style.opacity = '0.9';
+      confetti.style.transform = 'translate(-50%, -50%)';
+      confetti.style.borderRadius = '3px';
+      confetti.style.pointerEvents = 'none';
+
+      document.body.appendChild(confetti);
+
+      const angle = Math.random() * 360;
+      const distance = Math.random() * 400 + 100;
+
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+
+      confetti.animate(
+        [
+          { transform: `translate(-50%, -50%)` },
+          { transform: `translate(${x}px, ${y}px) rotate(${Math.random() * 720}deg)` }
+        ],
+        {
+          duration: 1200 + Math.random() * 800,
+          easing: 'ease-out',
+          fill: 'forwards'
+        }
+      );
+
+      setTimeout(() => confetti.remove(), 2000);
+    }
+  }
+
+  function randomColor() {
+    const colors = ['#ff4d6d', '#ff85a1', '#ffc2d1', '#c77dff', '#9d4edd', '#f72585'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  /* ===== FIREWORKS ===== */
+  function launchFireworks() {
+    for (let i = 0; i < 6; i++) {
+      setTimeout(() => createFirework(), i * 400);
+    }
+  }
+
+  function createFirework() {
+    const firework = document.createElement('div');
+    firework.style.position = 'fixed';
+    firework.style.left = Math.random() * 100 + 'vw';
+    firework.style.top = Math.random() * 40 + 'vh';
+    firework.style.width = '6px';
+    firework.style.height = '6px';
+    firework.style.background = '#fff';
+    firework.style.borderRadius = '50%';
+    firework.style.boxShadow = '0 0 12px #fff';
+    firework.style.pointerEvents = 'none';
+
+    document.body.appendChild(firework);
+
+    for (let i = 0; i < 25; i++) {
+      const spark = document.createElement('div');
+      spark.style.position = 'fixed';
+      spark.style.left = firework.style.left;
+      spark.style.top = firework.style.top;
+      spark.style.width = '5px';
+      spark.style.height = '5px';
+      spark.style.background = randomColor();
+      spark.style.borderRadius = '50%';
+      spark.style.pointerEvents = 'none';
+
+      document.body.appendChild(spark);
+
+      const angle = Math.random() * 360;
+      const distance = Math.random() * 150 + 50;
+
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+
+      spark.animate(
+        [
+          { transform: 'translate(0,0)', opacity: 1 },
+          { transform: `translate(${x}px, ${y}px)`, opacity: 0 }
+        ],
+        {
+          duration: 1200 + Math.random() * 600,
+          easing: 'ease-out',
+          fill: 'forwards'
+        }
+      );
+
+      setTimeout(() => spark.remove(), 2000);
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(135deg, #ffd1dc, #f3d1ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    /* ===== Fade-in Animation ===== */
-    .container {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.85);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      max-width: 360px;
-      width: 90%;
-      animation: fadeIn 1.5s ease;
-      position: relative;
-      z-index: 2;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ===== Heading ===== */
-    h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 2rem;
-      color: #ff4d6d;
-      margin-bottom: 1rem;
-    }
-
-    /* ===== GIF ===== */
-    .gif-container img {
-      width: 100%;
-      max-width: 220px;
-      border-radius: 15px;
-      margin-bottom: 1.5rem;
-    }
-
-    /* ===== Buttons ===== */
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: none;
-      padding: 0.8rem 1.4rem;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    .yes-btn {
-      background-color: #ff4d6d;
-      color: white;
-    }
-
-    .no-hearts-btn {
-      background-color: #c77dff;
-      color: white;
-      position: relative;
-    }
-
-    /* ===== Success Message ===== */
-    .success {
-      display: none;
-      font-family: 'Pacifico', cursive;
-      font-size: 1.6rem;
-      color: #ff4d6d;
-      margin-top: 1rem;
-    }
-
-    /* ===== Floating Hearts Background ===== */
-    .heart {
-      position: absolute;
-      bottom: -50px;
-      font-size: 1.2rem;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-120vh) scale(1.5);
-        opacity: 0;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Floating Hearts Background -->
-  <div id="hearts-container"></div>
-
-  <div class="container">
-    <h1 id="main-text">Ashley, will you be my Valentine? 💖</h1>
-
-    <!-- Centered GIF -->
-    <div class="gif-container">
-      <!-- You can replace this GIF with your own -->
-      <img src="https://media.giphy.com/media/l0MYyDa8S9ghzNebm/giphy.gif" alt="Romantic GIF">
-    </div>
-
-    <div class="buttons">
-      <button class="yes-btn" id="yesBtn">Yes 💕</button>
-      <button class="no-hearts-btn" id="noHeartsBtn">Boy Bye</button>
-    </div>
-
-    <div class="success" id="successText">
-      Oh yeah my lil sugar plum! I can’t wait to spend Valentine’s Day with you 😘
-    </div>
-  </div>
-
-  <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noHeartsBtn = document.getElementById('noHeartsBtn');
-    const mainText = document.getElementById('main-text');
-    const successText = document.getElementById('successText');
-    const heartsContainer = document.getElementById('hearts-container');
-
-    /* ===== YES BUTTON ACTION ===== */
-    yesBtn.addEventListener('click', () => {
-      mainText.style.display = 'none';
-      successText.style.display = 'block';
-      createHearts(35);
-    });
-
-    /* ===== PLAYFUL "YES BUT NO HEARTS" BUTTON ===== */
-    noHeartsBtn.addEventListener('mouseenter', () => {
-      const x = Math.random() * 160 - 80;
-      const y = Math.random() * 160 - 80;
-      noHeartsBtn.style.transform = `translate(${x}px, ${y}px)`;
-      noHeartsBtn.textContent = "Nice try 😏";
-    });
-
-    /* ===== Floating Hearts Generator ===== */
-    function createHearts(count) {
-      for (let i = 0; i < count; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.textContent = '💖';
-
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = 4 + Math.random() * 3 + 's';
-        heart.style.fontSize = 16 + Math.random() * 20 + 'px';
-
-        heartsContainer.appendChild(heart);
-
-        setTimeout(() => {
-          heart.remove();
-        }, 7000);
-      }
-    }
-  </script>
-
-</body>
-</html>
+    setTimeout(() => firework.remove(), 200);
+  }
+</script>
