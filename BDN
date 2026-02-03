@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noel's 1989 Supra - BDN</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .supra-section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+  }
+
+  .supra-header {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ff4d4d;
+  }
+
+  .supra-overview {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .supra-overview span {
+    color: #ffd700;
+    font-weight: bold;
+  }
+
+  .supra-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .supra-gallery img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+
+  .supra-gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  .supra-specs, .supra-future {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+
+  .supra-specs h2, .supra-future h2 {
+    color: #ff4d4d;
+    margin-bottom: 15px;
+  }
+
+  .supra-specs ul, .supra-future ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .supra-specs li, .supra-future li {
+    background-color: #1f1f1f;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .supra-specs li span, .supra-future li span {
+    font-weight: bold;
+    color: #ffd700;
+  }
+
+  @media (max-width: 600px) {
+    .supra-header {
+      font-size: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="supra-section">
+  <h1 class="supra-header">Noel’s 1989 Toyota Supra</h1>
+
+  <p class="supra-overview">
+    Fully restored and upgraded, Noel's Supra swapped the <span>USA 7M-GE</span> for a <span>JDM 1JZ</span>. 
+    Upgraded <span>fuel system</span> and a <span>BorgWarner single turbo</span> push it to ~650whp. 
+    Despite the power, it still loses to Blake's 2015 Audi A3 on the street races!
+  </p>
+
+  <div class="supra-gallery">
+    <img src="images/supra-exterior.jpg" alt="Noel's Supra Exterior">
+    <img src="images/supra-engine.jpg" alt="Noel's Supra Engine">
+    <img src="images/supra-interior.jpg" alt="Noel's Supra Interior">
+  </div>
+
+  <div class="supra-specs">
+    <h2>Specifications & Modifications</h2>
+    <ul>
+      <li>Engine: <span>JDM 1JZ swap</span></li>
+      <li>Fuel System: <span>Upgraded</span></li>
+      <li>Turbo: <span>BorgWarner single turbo</span></li>
+      <li>Horsepower: <span>~650 whp</span></li>
+      <li>Notes: <span>Full restoration completed</span></li>
+    </ul>
+  </div>
+
+  <div class="supra-future">
+    <h2>Future Plans</h2>
+    <ul>
+      <li><span>Upgrade Suspension:</span> Coilovers and sway bars</li>
+      <li><span>Exterior Mods:</span> New widebody kit and paint</li>
+      <li><span>Performance:</span> Track-tuned ECU & upgraded intercooler</li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>
